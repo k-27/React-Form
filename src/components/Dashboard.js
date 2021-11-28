@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Container, Row, Col} from "react-bootstrap";
 import EmployeeForm from "./EmployeeForm";
 import EmployeeList from "./EmployeeList";
+import {EmployeeDataContext} from "../contexts/EmployeeDataContext";
 
 function Dashboard() {
 
@@ -15,12 +16,14 @@ function Dashboard() {
                 </div>
             </ Row>
             <Row>
+                <EmployeeDataContext.Provider value={{employees, setEmployees}}>
                 <Col md={6}>
-                    <EmployeeForm addEmployee={setEmployees} />
+                    <EmployeeForm />
                 </Col>
                 <Col md={6}>
-                    <EmployeeList employeeList={employees}/>
+                    <EmployeeList />
                 </Col>
+                </EmployeeDataContext.Provider>
             </ Row>
         </Container>
     )

@@ -1,8 +1,11 @@
-import React, { useState} from "react";
+import React, { useState, useContext} from "react";
 import Button from 'react-bootstrap/Button'
+import {EmployeeDataContext} from "../contexts/EmployeeDataContext";
 
 
-function EmployeeForm(props) {
+function EmployeeForm() {
+
+    const {setEmployees} = useContext(EmployeeDataContext);
 
     const initialFormState= {
         name:'',
@@ -53,7 +56,7 @@ function EmployeeForm(props) {
     const onFormSubmit = e =>  {
         e.preventDefault();
         if(validateIputs()){
-            props.addEmployee((employees)=>[...employees,{
+            setEmployees((employees)=>[...employees,{
                 name,age,email,phone
             }]);
             setFormData(initialFormState);
@@ -88,8 +91,7 @@ function EmployeeForm(props) {
                 <label styles={styles.inputLabel}>Age</label><br/>
                     <input
                     style={styles.inputTab}
-                    type="number"
-                    placeholder="Age"
+                    placeholder="Age (Must be 18+)"
                     name="age"
                     value={age}
                     onChange={onChange}

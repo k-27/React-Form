@@ -1,10 +1,12 @@
-import React from "react";
+import React,{useContext} from "react";
 import { Container, Row, Accordion} from 'react-bootstrap'
+import {EmployeeDataContext} from "../contexts/EmployeeDataContext";
 
-function EmployeeList(props) {
+function EmployeeList() {
+    const {employees} = useContext(EmployeeDataContext);
 
     const renderEmployees =()=>{
-        if(props.employeeList.length===0){
+        if(employees.length===0){
             return (
                 <p>No Data</p>
             )
@@ -12,7 +14,7 @@ function EmployeeList(props) {
             return(
                 <Accordion defaultActiveKey="0">
                     {
-                        props.employeeList.map( employee=>{
+                        employees.map( employee=>{
                             return(
                                 <Accordion.Item >
                                     <Accordion.Header>{employee.name}</Accordion.Header>
